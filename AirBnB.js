@@ -7173,27 +7173,27 @@ måste innehålla ditt fullständiga namn (detta förenklar rättningen avsevär
 med Git Bash eller Manuellt. Se ”Instruktioner för inlämning till Github och Studentportalen”
 Skriv in länken som svar på inlämningsuppg
 */
-function onlyUnique(value, index, self) {
+function onlyUnique(value, index, self) { //funktion för att få bort dubbletter av rumtyper
 	return self.indexOf(value) === index;
 }
-
+// variabler skapas
 var price = [];
 var reviews = [];
 var accommodates = [];
 var roomType = [];
-for (var i = 0; i < bigData.length; i++ ) {
+for (var i = 0; i < bigData.length; i++ ) { //variablerna som skapades får värden från bigData
 	price.push(bigData[i].price);
 	reviews.push(bigData[i].reviews);
 	accommodates.push(bigData[i].accommodates);
 	roomType.push(bigData[i].room_type);
 }
 
-var uniqueRoomTypes = roomType.filter(onlyUnique);
-var roomTypeCount = [];
+var uniqueRoomTypes = roomType.filter(onlyUnique); // Använder funktionen för att få bort alla dubbletter
+var roomTypeCount = []; // roomTypeCount skapas och nollställs i for-loopen
 for (var i=0; i < uniqueRoomTypes.length; i++) {
 	roomTypeCount.push(0);
 }
-
+// For-loop för att räkna antalet av varje rumtyp och lägga in det i variabeln roomTypeCount så den hamnar på samma plats i arrayen som uniqueRoomTypes
 for (i = 0; i < bigData.length; i++) {
 	if (roomType[i] == uniqueRoomTypes[0]) {
 		roomTypeCount[0] += 1;
@@ -7208,7 +7208,7 @@ for (i = 0; i < bigData.length; i++) {
 		console.log('Fel');
 	}
 }
-
+// Datat till diagrammen 1-3
 var trace1 = {
   x: price,
   y: reviews,
@@ -7234,14 +7234,14 @@ var trace3 = {
 		color: 'rgb(102, 196, 215))',
 	}
 };
-
+// Färger till Pie
 var PieColors = 
   ['rgb(56, 184, 73)', 'rgb(255, 253, 56)', 'rgb(245, 28, 255)'];
 
-var data = [trace1];
+var data = [trace1]; // Datat görs om till arrayer
 var data2 = [trace2];
 var data3 = [trace3];
-var data4 = [{
+var data4 = [{				// Datat till Pie Diagrammet
 	values: roomTypeCount,
 	labels: uniqueRoomTypes,
 	type: 'pie',
@@ -7250,7 +7250,7 @@ var data4 = [{
   },
 }];
 
-
+// Lägger till titlar till graferna 
 var layout1 = {
 	xaxis: {
 		title: 'Price'
@@ -7285,7 +7285,7 @@ var layout4 = {
 };
 
 
-
+// Använder KPI 
 Plotly.newPlot('Diagram', data, layout1);
 Plotly.newPlot('Diagram2', data2, layout2);
 Plotly.newPlot('Diagram3', data3, layout3);
